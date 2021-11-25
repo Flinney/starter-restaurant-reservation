@@ -144,10 +144,13 @@ const reservationExists = async (req, res, next) => {
  * List handler for reservation resources
  */
 async function list(req, res) {
-  const { date } = req.query;
-  const reservations = date
-    ? await service.listByDate(date)
-    : await service.list();
+  const { date, mobile_number } = req.query;
+  let reservations;
+  if (mobile_number) {
+    reservations = await service.search(mobile_number);
+  } else {
+    reservations = date ? await service.listByDate(date) : await service.list();
+  }
   res.json({
     data: reservations,
   });
