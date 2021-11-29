@@ -51,7 +51,11 @@ export default function Search() {
       {display && (
         <div>
           {reservations.length ? (
-            <ReservationTable reservations={reservations} />
+            <ReservationTable
+              reservations={reservations}
+              setReservations={setReservations}
+              setError={setError}
+            />
           ) : (
             <h3>No reservations found</h3>
           )}

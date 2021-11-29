@@ -8,7 +8,16 @@ export default function ReservationRow({
   people,
   reservation_time,
   reservation,
+  cancelRes,
 }) {
+  function handleCancel() {
+    return window.confirm(
+      "Do you want to cancel this reservation? This cannot be undone."
+    )
+      ? cancelRes(reservation)
+      : null;
+  }
+
   return (
     <tr>
       <th scope="row">{reservation_id}</th>
@@ -30,6 +39,24 @@ export default function ReservationRow({
             Seat
           </a>
         ) : null}
+      </td>
+      <td>
+        <a
+          className="btn btn-secondary"
+          role="button"
+          href={`/reservations/${reservation.reservation_id}/edit`}
+        >
+          Edit
+        </a>
+      </td>
+      <td>
+        <button
+          className="btn btn-danger"
+          data-reservation-id-cancel={reservation.reservation_id}
+          onClick={handleCancel}
+        >
+          Cancel
+        </button>
       </td>
     </tr>
   );
