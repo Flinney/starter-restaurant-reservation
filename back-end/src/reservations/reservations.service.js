@@ -53,6 +53,15 @@ function search(mobile_number) {
     .orderBy("reservation_date");
 }
 
+function modify(reservation_id, reservation) {
+  return knex("reservations")
+    .select("*")
+    .where({ reservation_id })
+    .update(reservation, "*")
+    .returning("*")
+    .then((updated) => updated[0]);
+}
+
 module.exports = {
   list,
   create,
@@ -61,4 +70,5 @@ module.exports = {
   finish,
   update,
   search,
+  modify,
 };
