@@ -97,8 +97,10 @@ function isWithinOpenHours(req, res, next) {
 }
 
 function hasBookedStatus(req, res, next) {
-  const { status } = req.body.data;
-  if (status === "seated" || status === "finished") {
+  const { status } = res.locals.reservation
+    ? res.locals.reservation
+    : req.body.data;
+  if (status === "seated" || status === "finished" || status === "cancelled") {
     return next({
       status: 400,
       message: `New reservation can not have ${status} status.`,
@@ -108,7 +110,7 @@ function hasBookedStatus(req, res, next) {
 }
 
 function isValidStatus(req, res, next) {
-  const VALID_STATUSES = ["booked", "seated", "finished"];
+  const VALID_STATUSES = ["booked", "seated", "finished", "cancelled"];
   const { status } = req.body.data;
   if (!VALID_STATUSES.includes(status)) {
     return next({ status: 400, message: "Status unknown." });
@@ -175,6 +177,14 @@ async function update(req, res, next) {
   res.json({ data: reservation });
 }
 
+async function modify(req, res, next) {
+  const { reservation_Id } = req.params;
+  const reservation = req.body.data;
+  const data = await service.modify(reservation_Id, reservation);
+  reservation.reservation_id = data.reservation_id;
+  res.json({ data: reservation });
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
@@ -191,5 +201,14 @@ module.exports = {
     isValidStatus,
     isAlreadyFinished,
     asyncErrorBoundary(update),
+  ],
+  modify: [
+    isValidReservation,
+    isNotOnTuesday,
+    isInTheFuture,
+    isWithinOpenHours,
+    asyncErrorBoundary(reservationExists),
+    hasBookedStatus,
+    asyncErrorBoundary(modify),
   ],
 };

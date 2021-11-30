@@ -62,7 +62,11 @@ function Dashboard({ date }) {
         </button>
       </div>
       <ErrorAlert error={reservationsError} />
-      <ReservationTable reservations={reservations} />
+      <ReservationTable
+        reservations={reservations}
+        setReservations={setReservations}
+        setError={setReservationsError}
+      />
       <div>
         <TableList tables={tables} loadDashboard={loadDashboard} />
       </div>
