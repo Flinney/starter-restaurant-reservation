@@ -82,7 +82,6 @@ export function next(currentDate) {
 }
 
 export function isNotOnTuesday(reservation_date, errors) {
-  console.log(reservation_date);
   const [year, month, day] = reservation_date.split("-");
   const date = new Date(`${month} ${day}, ${year}`);
   if (date.getDay() === 2) {
@@ -91,7 +90,6 @@ export function isNotOnTuesday(reservation_date, errors) {
 }
 
 export function isInTheFuture(reservation_date, errors) {
-  console.log(reservation_date);
   const [year, month, day] = reservation_date.split("-");
   const date = new Date(`${month} ${day}, ${year}`);
   const today = new Date();
