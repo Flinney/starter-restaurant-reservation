@@ -33,12 +33,6 @@ export default function ReservationTable({
     return (
       <ReservationRow
         key={res.reservation_id}
-        reservation_id={res.reservation_id}
-        first_name={res.first_name}
-        last_name={res.last_name}
-        mobile_number={res.mobile_number}
-        people={res.people}
-        reservation_time={res.reservation_time}
         reservation={res}
         cancelRes={cancelRes}
       />

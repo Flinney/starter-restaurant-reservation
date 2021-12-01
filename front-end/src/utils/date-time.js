@@ -81,6 +81,7 @@ export function next(currentDate) {
   return asDateString(date);
 }
 
+//Time-based validation for creating and updating reservations
 export function isNotOnTuesday(reservation_date, errors) {
   const [year, month, day] = reservation_date.split("-");
   const date = new Date(`${month} ${day}, ${year}`);

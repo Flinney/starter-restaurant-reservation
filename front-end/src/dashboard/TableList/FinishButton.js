@@ -6,7 +6,6 @@ export default function FinishButton({ status, table, loadDashboard }) {
   const history = useHistory();
 
   async function handleClick() {
-    console.log("You made it here.");
     return window.confirm(
       "Is this table ready to seat new guests? This cannot be undone."
     )
@@ -16,7 +15,7 @@ export default function FinishButton({ status, table, loadDashboard }) {
 
   async function handleFinish(table_id, reservation_id) {
     await unassignTable(table_id, reservation_id);
-    loadDashboard();
+    await loadDashboard();
     history.push("/dashboard");
   }
 
