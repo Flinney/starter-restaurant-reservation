@@ -4,7 +4,7 @@
 
 Reservation and seating app that uses the PERN (Postgres, Express, React, Node) stack to enable a hostess (or other employee) to create and manage reservations and tables.
 
-You can see this projfect live [here](https://ab-reservations-client.herokuapp.com/dashboard).
+You can see this project live [here](https://ab-reservations-client.herokuapp.com/dashboard).
 
 ## Dependencies
 
