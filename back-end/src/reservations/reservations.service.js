@@ -24,10 +24,10 @@ function listByDate(reservation_date) {
 }
 
 function read(reservation_id) {
-  console.log(`Service ${reservation_id}`);
   return knex("reservations").select("*").where({ reservation_id }).first();
 }
 
+//only updates status
 function update(reservation_id, status) {
   return knex("reservations")
     .select("*")
@@ -53,6 +53,7 @@ function search(mobile_number) {
     .orderBy("reservation_date");
 }
 
+//updates when reservation is modified by user
 function modify(reservation_id, reservation) {
   return knex("reservations")
     .select("*")

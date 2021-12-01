@@ -60,21 +60,25 @@ export default function Seat() {
 
   return (
     <>
+      <div className="d-flex justify-content-center pt-3">
+        <h3>Select Table for Reservation</h3>
+      </div>
       <ErrorAlert error={error} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="d-flex justify-content-center">
         <label htmlFor="seat_reservation">
           Seat at:
           <select
             id="table_id"
             name="table_id"
             onChange={handleSelectTable}
+            className="mr-1"
             required
           >
             <option defaultValue>Select a table</option>
             {options}
           </select>
         </label>
-        <button className="btn btn-primary" type="submit">
+        <button className="btn btn-primary mr-1" type="submit">
           Submit
         </button>
         <button className="btn btn-secondary" onClick={handleCancel}>

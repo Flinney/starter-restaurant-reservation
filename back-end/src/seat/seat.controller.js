@@ -3,6 +3,7 @@ const reservationService = require("../reservations/reservations.service");
 const tableService = require("../tables/tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
+//validation middleware
 function hasReservationId(req, res, next) {
   const table = req.body.data;
   if (!table) {
@@ -63,6 +64,7 @@ async function tableIsOccupied(req, res, next) {
   next();
 }
 
+//CRUD
 async function update(req, res, next) {
   const { reservation_id } = req.body.data;
   const { table_id } = req.params;
